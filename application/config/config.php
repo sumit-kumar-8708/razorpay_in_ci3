@@ -385,6 +385,7 @@ $config['sess_match_ip'] = FALSE;
 $config['sess_time_to_update'] = 300;
 $config['sess_regenerate_destroy'] = FALSE;
 
+
 /*
 |--------------------------------------------------------------------------
 | Cookie Related Variables
@@ -521,3 +522,7 @@ $config['rewrite_short_tags'] = FALSE;
 | Array:		array('10.0.1.200', '192.168.5.0/24')
 */
 $config['proxy_ips'] = '';
+
+$config['composer_autoload'] = TRUE;
+$config['composer_autoload'] = FCPATH . 'vendor/autoload.php';
+
