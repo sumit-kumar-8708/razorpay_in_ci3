@@ -14,7 +14,7 @@
     <?php if($this->session->flashdata('error')): ?>
         <p><?php echo $this->session->flashdata('error'); ?></p>
     <?php endif; ?>
-    <form action="<?php echo site_url('razorpay/verify'); ?>" method="POST" id="paymentForm">
+    <form action="<?php echo base_url('payment/verify'); ?>" method="POST" id="paymentForm">
         <button id="rzp-button1">Pay</button>
     </form>
 
@@ -31,6 +31,10 @@
                 document.getElementById('paymentForm').innerHTML += '<input type="hidden" name="razorpay_order_id" value="' + response.razorpay_order_id + '">';
                 document.getElementById('paymentForm').innerHTML += '<input type="hidden" name="razorpay_signature" value="' + response.razorpay_signature + '">';
                 document.getElementById('paymentForm').submit();
+            },
+            "prefill": {
+                "name": "asif",
+                "email": "asif@basix.in"
             }
         };
 

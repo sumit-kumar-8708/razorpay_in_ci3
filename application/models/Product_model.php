@@ -9,8 +9,22 @@ class Product_model extends CI_Model
     public function get_product($id)
     {
         return $this->db->get_where('products', ['id' => $id])->row();
-    }
+    } 
 
+    public function to_check_product_purchase($product_id)
+    {
+        $this->db->select('transactions.*, products.name as product_name, products.price as product_price');
+        $this->db->from('transactions');
+        $this->db->join('products', 'transactions.product_id = products.id');
+        $this->db->where('transactions.product_id', $product_id);
+        $this->db->order_by('transactions.id','desc');
+        $data =  $this->db->get()->row();
+        if($data->status){
+            return $data;
+        }else{
+            return false;
+        }       
+    }
 
     public function insert_payment($data)
     {

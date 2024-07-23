@@ -25,7 +25,8 @@ class RazorpayLibrary
     {
         $orderData = [
             'receipt'         => $receipt,
-            'amount'          => $amount * 100, // amount in the smallest currency unit
+            // 'amount'          => $amount * 100, // amount in the smallest currency unit
+            'amount'          => $amount,
             'currency'        => 'INR',
             'payment_capture' => 1 // auto capture
         ];

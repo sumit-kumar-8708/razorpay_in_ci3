@@ -7,7 +7,6 @@ class Payment extends CI_Controller
     {
         parent::__construct();
         $this->load->library('razorpaylibrary');
-        // $this->load->model('payment_model');
         $this->load->model('product_model');
         $this->load->library('session'); // Load the session library
     }
@@ -20,10 +19,14 @@ class Payment extends CI_Controller
 
     public function purchase($product_id)
     {
+        $check_product_purchase = $this->product_model->to_check_product_purchase($product_id);
+      
+        if($check_product_purchase){
+            $this->session->set_flashdata('success', 'You are Already purchase this product');
+            redirect(base_url().'payment');
+        }
+        
         $product = $this->product_model->get_product($product_id);
-
-		// echo '<pre>';
-		// print_r($product); die;
 
         if ($product) {
             $order = $this->razorpaylibrary->create_order($product->price * 100, 'order_rcptid_' . $product_id);
@@ -42,7 +45,7 @@ class Payment extends CI_Controller
     }
 
     public function verify()
-    {
+    {  
         $payment_id = $this->input->post('razorpay_payment_id');
         $order_id = $this->input->post('razorpay_order_id');
         $signature = $this->input->post('razorpay_signature');
@@ -57,13 +60,13 @@ class Payment extends CI_Controller
             ]);
 
             // Fetch payment details to show on the success page
-            $data['payment_details'] = $this->payment_model->get_payment_by_order_id($order_id);
+            $data['payment_details'] = $this->product_model->get_payment_by_order_id($order_id);
             $this->session->set_flashdata('success', 'Payment successful');
             $this->load->view('product/success_view', $data); // Load success view with payment details
-        } else {
+        } else {          
             $this->product_model->update_payment($order_id, ['status' => '0']);
             $this->session->set_flashdata('error', 'Payment failed');
-            redirect('product/failed');
+            redirect('payment/failed');
         }
     }
 

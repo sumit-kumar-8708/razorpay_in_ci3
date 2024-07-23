@@ -11,6 +11,14 @@ This  #[\AllowDynamicProperties] is add in some files
 And run at development mode
 
 ###################
+Install Razorpay PHP SDK
+###################
+
+You can install the Razorpay PHP SDK using Composer. If you haven't already installed Composer, download it from getcomposer.org.
+
+composer require razorpay/razorpay
+
+###################
 What is CodeIgniter
 ###################
 
