@@ -1,4 +1,16 @@
 ###################
+I think a better way is to implement #[\AllowDynamicProperties]
+###################
+
+###################
+#[\AllowDynamicProperties]
+###################
+
+This  #[\AllowDynamicProperties] is add in some files
+/system/core/URI.php , /system/core/Router.php , /system/core/Loader.php , /system/core/Controller.php , /system/database/DB_driver.php
+And run at development mode
+
+###################
 What is CodeIgniter
 ###################
 
